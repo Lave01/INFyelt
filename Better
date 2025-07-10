@@ -9871,16 +9871,24 @@ addcmd('animation',{'anim'},function(args, speaker)
 end)
 
 addcmd("vortex", {}, function(args, speaker)
-    local success, err = pcall(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lave01/VortexEH/refs/heads/main/V3"))()
-    end)
-    
-    if not success then
-        warn("[VORTEX ERROR]: " .. tostring(err))
-    else
-        print("[VORTEX]: Loaded successfully.")
-    end
+	-- Speaker global setzen
+	getgenv().vortex_speaker = speaker
+
+	-- Loadstring ausführen
+	local success, result = pcall(function()
+		local code = game:HttpGet("https://raw.githubusercontent.com/Lave01/VortexEH/refs/heads/main/V3")
+		local func = loadstring(code)
+		return func()
+	end)
+
+	-- Fehlerausgabe
+	if not success then
+		warn("[VORTEX ERROR]: " .. tostring(result))
+	else
+		print("[VORTEX]: Loaded successfully for " .. tostring(speaker.Name))
+	end
 end)
+
 
 addcmd('noanim',{},function(args, speaker)
 	speaker.Character.Animate.Disabled = true
