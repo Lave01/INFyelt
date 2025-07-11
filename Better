@@ -126,7 +126,7 @@ if makefolder and isfolder and writefile and isfile then
     end)
 end
 
-currentVersion = "by lave"
+currentVersion = " 0.0 moded"
 
 ScaledHolder = Instance.new("Frame")
 Scale = Instance.new("UIScale")
